@@ -28,7 +28,16 @@ Form::Form(std::string name, int sign_grade, int exec_grade) :
 	has_been_signed(false),
 	sign_grade(sign_grade),
 	exec_grade(exec_grade)
-{}
+{
+	if (sign_grade > 150)
+		throw Form::GradeTooLowException();
+	if (sign_grade < 1)
+		throw Form::GradeTooHighException();
+	if (exec_grade > 150)
+		throw Form::GradeTooLowException();
+	if (exec_grade < 1)
+		throw Form::GradeTooHighException();
+}
 
 Form &Form::operator=(Form const &rhs) {
 	has_been_signed = rhs.has_been_signed;
@@ -68,6 +77,6 @@ void Form::beSigned(Bureaucrat &bureaucrat) {
 }
 
 std::ostream &operator <<(std::ostream &ostream, Form &form) {
-	ostream << "Form " << form.getName() << " is_signed: " << (form.isSigned() ? "true" : "false") << ", sign_grade: " << form.getSignGrade() << ", form exec_grade: " << form.getExecGrade() << ".";
+	ostream << "Form <" << form.getName() << "> is_signed: " << (form.isSigned() ? "true" : "false") << ", sign_grade: " << form.getSignGrade() << ", exec_grade: " << form.getExecGrade() << ".";
 	return ostream;
 }

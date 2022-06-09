@@ -16,12 +16,12 @@ class Form {
 
 		Form &operator=(Form const &rhs);
 
-		class GradeTooHighException {
+		class GradeTooHighException : public std::exception {
 			public:
 				char const * what() const throw();
 		};
 
-		class GradeTooLowException {
+		class GradeTooLowException : public std::exception {
 			public:
 				char const * what() const throw();
 		};
