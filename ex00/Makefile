@@ -6,16 +6,17 @@
 #    By: mvan-wij <mvan-wij@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/10/27 13:16:39 by mvan-wij      #+#    #+#                  #
-#    Updated: 2022/06/08 12:35:22 by mvan-wij      ########   odam.nl          #
+#    Updated: 2022/06/09 12:28:44 by mvan-wij      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 ################################################################################
 
-BLUE_FG := \e[34m
-RESET_COLOR := \e[0m
 GREEN_FG := \e[32m
+YELLOW_FG := \e[33m
+BLUE_FG := \e[34m
 CYAN_FG := \e[36m
+RESET_COLOR := \e[0m
 CLEAR_REST_OF_LINE := \e[K
 print_prefix = printf "$(CYAN_FG)%-$(PROJECT_SPACING)s$(RESET_COLOR) $(GREEN_FG)%-$(RULE_SPACING)s$(RESET_COLOR) : " "[$(1)]" "$(2)"
 exec_no_nl = printf "$(1)$(CLEAR_REST_OF_LINE)\n"; $(1); printf "\e[A"
@@ -98,7 +99,9 @@ fclean: clean
 re: fclean all
 
 run: $(NAME)
+	@printf "$(YELLOW_FG)--------------$(RESET_COLOR)\n"
 	@./$(NAME) $(ARGS)
+	@printf "\e[A$(YELLOW_FG)--------------$(RESET_COLOR)\n"
 
 .PHONY: all debug clean fclean re sources
 
