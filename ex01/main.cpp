@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstdlib>
+#include <cassert>
 #include "Form.hpp"
 
 #define YELLOW_FG "\x1b[33m"

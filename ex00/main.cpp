@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstdlib>
+#include <cassert>
 #include "Bureaucrat.hpp"
 
 void check_leaks() {
