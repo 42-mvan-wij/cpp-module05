@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstdlib>
 #include "RobotomyRequestForm.hpp"
 
 RobotomyRequestForm::RobotomyRequestForm() : AForm("RobotomyRequestForm", 72, 45) {
@@ -26,7 +27,7 @@ RobotomyRequestForm &RobotomyRequestForm::operator=(RobotomyRequestForm const &r
 
 void RobotomyRequestForm::execute(Bureaucrat const &executor) const {
 	AForm::execute(executor);
-	if (rand() % 2 == 0) {
+	if (std::rand() % 2 == 0) {
 		std::cout << target << " was successfully robotomized." << std::endl;
 	} else {
 		std::cout << target << " was unsuccessfully robotomized." << std::endl;
