@@ -4,8 +4,10 @@
 # include "AForm.hpp"
 
 class RobotomyRequestForm : public AForm {
-	public:
+	private:
 		RobotomyRequestForm();
+
+	public:
 		RobotomyRequestForm(RobotomyRequestForm const &src);
 		virtual ~RobotomyRequestForm();
 

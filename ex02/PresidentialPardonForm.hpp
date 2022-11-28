@@ -4,8 +4,10 @@
 # include "AForm.hpp"
 
 class PresidentialPardonForm : public AForm {
-	public:
+	private:
 		PresidentialPardonForm();
+
+	public:
 		PresidentialPardonForm(PresidentialPardonForm const &src);
 		virtual ~PresidentialPardonForm();
 

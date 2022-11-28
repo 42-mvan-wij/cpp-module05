@@ -4,8 +4,10 @@
 # include "AForm.hpp"
 
 class ShrubberyCreationForm : public AForm {
-	public:
+	private:
 		ShrubberyCreationForm();
+
+	public:
 		ShrubberyCreationForm(ShrubberyCreationForm const &src);
 		virtual ~ShrubberyCreationForm();
 
