@@ -3,13 +3,18 @@
 
 # include <string>
 
+# define WORST_GRADE 150
+# define BEST_GRADE 1
+
 class Bureaucrat {
-	public:
+	private:
 		Bureaucrat();
+
+	public:
 		Bureaucrat(Bureaucrat const &src);
 		virtual ~Bureaucrat();
 
-		Bureaucrat(std::string name, int grade);
+		Bureaucrat(std::string name, unsigned int grade);
 
 		Bureaucrat &operator=(Bureaucrat const &rhs);
 
@@ -30,9 +35,9 @@ class Bureaucrat {
 
 	protected:
 		std::string const name;
-		int grade;
+		unsigned int grade;
 };
 
-std::ostream &operator <<(std::ostream &ostream, Bureaucrat &bureaucrat);
+std::ostream &operator<<(std::ostream &ostream, Bureaucrat &bureaucrat);
 
 #endif

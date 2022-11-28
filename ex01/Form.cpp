@@ -3,10 +3,10 @@
 
 Form::Form() :
 	has_been_signed(false),
-	sign_grade(150),
-	exec_grade(150)
+	sign_grade(WORST_GRADE),
+	exec_grade(WORST_GRADE)
 {
-	std::cout << "Form::Form() called" << std::endl;
+	std::cout << "Default Form constructor called" << std::endl;
 }
 
 Form::Form(const Form &src) :
@@ -15,7 +15,7 @@ Form::Form(const Form &src) :
 	sign_grade(src.sign_grade),
 	exec_grade(src.exec_grade)
 {
-	std::cout << "Form::Form(const Form &) called" << std::endl;
+	std::cout << "Form copy constructor called" << std::endl;
 	*this = src;
 }
 
@@ -29,17 +29,19 @@ Form::Form(std::string name, int sign_grade, int exec_grade) :
 	sign_grade(sign_grade),
 	exec_grade(exec_grade)
 {
-	if (sign_grade > 150)
+	if (sign_grade > WORST_GRADE)
 		throw Form::GradeTooLowException();
-	if (sign_grade < 1)
+	if (sign_grade < BEST_GRADE)
 		throw Form::GradeTooHighException();
-	if (exec_grade > 150)
+	if (exec_grade > WORST_GRADE)
 		throw Form::GradeTooLowException();
-	if (exec_grade < 1)
+	if (exec_grade < BEST_GRADE)
 		throw Form::GradeTooHighException();
 }
 
 Form &Form::operator=(Form const &rhs) {
+	if (this == &rhs)
+		return *this;
 	has_been_signed = rhs.has_been_signed;
 	return *this;
 }
@@ -76,7 +78,9 @@ void Form::beSigned(Bureaucrat &bureaucrat) {
 	has_been_signed = true;
 }
 
-std::ostream &operator <<(std::ostream &ostream, Form &form) {
-	ostream << "Form <" << form.getName() << "> is_signed: " << (form.isSigned() ? "true" : "false") << ", sign_grade: " << form.getSignGrade() << ", exec_grade: " << form.getExecGrade() << ".";
+std::ostream &operator<<(std::ostream &ostream, Form &form) {
+	std::ostream::fmtflags before = ostream.setf(ostream.boolalpha);
+	ostream << "Form <" << form.getName() << "> is_signed: " << form.isSigned() << ", sign_grade: " << form.getSignGrade() << ", exec_grade: " << form.getExecGrade() << ".";
+	ostream.setf(before);
 	return ostream;
 }
