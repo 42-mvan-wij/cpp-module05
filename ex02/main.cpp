@@ -33,14 +33,14 @@ int main() {
 
 		try {
 			form.beSigned(intern);
-		} catch (Form::GradeTooLowException &e) {
+		} catch (AForm::GradeTooLowException &e) {
 			std::cerr << "1. " << GREEN_FG << "Expected error: " << RESET_COLOR << e.what() << std::endl << "   ";
 		}
 		intern.signForm(form);
 
 		try {
 			form.execute(shrub_exec);
-		} catch (Form::NotSignedException &e) {
+		} catch (AForm::NotSignedException &e) {
 			std::cerr << "2. " << GREEN_FG << "Expected error: " << RESET_COLOR << e.what() << std::endl << "   ";
 		}
 		shrub_exec.executeForm(form);
@@ -49,7 +49,7 @@ int main() {
 
 		try {
 			form.execute(shrub_signer);
-		} catch (Form::GradeTooLowException &e) {
+		} catch (AForm::GradeTooLowException &e) {
 			std::cerr << "4. " << GREEN_FG << "Expected error: " << RESET_COLOR << e.what() << std::endl << "   ";
 		}
 		shrub_signer.executeForm(form);

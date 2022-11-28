@@ -24,15 +24,15 @@ Intern &Intern::operator=(Intern const &rhs) {
 }
 
 template<typename T>
-Form *createFormInstance(std::string const target) {
+AForm *createFormInstance(std::string const target) {
 	return new T(target);
 }
 
 #define N_FORMS 3
 
-Form *Intern::makeForm(std::string const form_name, std::string const target) {
+AForm *Intern::makeForm(std::string const form_name, std::string const target) {
 	std::string arr[N_FORMS] = { "ShrubberyCreationForm", "RobotomyRequestForm", "PresidentialPardonForm" };
-	Form* (*arr2[N_FORMS])(std::string const) = { createFormInstance<ShrubberyCreationForm>, createFormInstance<RobotomyRequestForm>, createFormInstance<PresidentialPardonForm> };
+	AForm* (*arr2[N_FORMS])(std::string const) = { createFormInstance<ShrubberyCreationForm>, createFormInstance<RobotomyRequestForm>, createFormInstance<PresidentialPardonForm> };
 	for (int i = 0; i < N_FORMS; i++) {
 		if (arr[i] == form_name) {
 			std::cout << "Intern creates form \"" << form_name << "\"" << std::endl;

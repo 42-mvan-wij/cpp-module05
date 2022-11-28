@@ -18,7 +18,7 @@ int main() {
 	Bureaucrat bureaucrat("Joe", 1);
 	Intern intern;
 
-	Form *form = intern.makeForm("ShrubberyCreationForm", "house");
+	AForm *form = intern.makeForm("ShrubberyCreationForm", "house");
 	assert(form->getName() == "ShrubberyCreationForm");
 	assert(form->isSigned() == false);
 	assert(form->getSignGrade() == 145);
@@ -26,7 +26,7 @@ int main() {
 	form->beSigned(bureaucrat);
 	form->execute(bureaucrat);
 
-	Form *form2 = intern.makeForm("RobotomyRequestForm", "Will");
+	AForm *form2 = intern.makeForm("RobotomyRequestForm", "Will");
 	assert(form2->getName() == "RobotomyRequestForm");
 	assert(form2->isSigned() == false);
 	assert(form2->getSignGrade() == 72);
@@ -34,7 +34,7 @@ int main() {
 	form2->beSigned(bureaucrat);
 	form2->execute(bureaucrat);
 
-	Form *form3 = intern.makeForm("PresidentialPardonForm", "Joe");
+	AForm *form3 = intern.makeForm("PresidentialPardonForm", "Joe");
 	assert(form3->getName() == "PresidentialPardonForm");
 	assert(form3->isSigned() == false);
 	assert(form3->getSignGrade() == 25);

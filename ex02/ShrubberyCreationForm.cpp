@@ -2,11 +2,11 @@
 #include <fstream>
 #include "ShrubberyCreationForm.hpp"
 
-ShrubberyCreationForm::ShrubberyCreationForm() : Form("ShrubberyCreationForm", 145, 137) {
+ShrubberyCreationForm::ShrubberyCreationForm() : AForm("ShrubberyCreationForm", 145, 137) {
 	std::cout << "ShrubberyCreationForm::ShrubberyCreationForm() called" << std::endl;
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &src) : Form(src), target(src.target) {
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &src) : AForm(src), target(src.target) {
 	std::cout << "ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &) called" << std::endl;
 }
 
@@ -14,15 +14,15 @@ ShrubberyCreationForm::~ShrubberyCreationForm() {
 	std::cout << "ShrubberyCreationForm destructor called" << std::endl;
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(std::string target) : Form("ShrubberyCreationForm", 145, 137), target(target) {}
+ShrubberyCreationForm::ShrubberyCreationForm(std::string target) : AForm("ShrubberyCreationForm", 145, 137), target(target) {}
 
 ShrubberyCreationForm &ShrubberyCreationForm::operator=(ShrubberyCreationForm const &rhs) {
-	Form::operator=(rhs);
+	AForm::operator=(rhs);
 	return *this;
 }
 
 void ShrubberyCreationForm::execute(Bureaucrat const &executor) const {
-	Form::execute(executor);
+	AForm::execute(executor);
 	std::ofstream file(target + "_shrubbery");
 	file
 		<< "            ,@@@@@@@," << std::endl
