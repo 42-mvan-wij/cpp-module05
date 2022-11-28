@@ -1,20 +1,21 @@
 #include <iostream>
+#include <cstdlib>
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
 #include "Intern.hpp"
 
-#define YELLOW_FG "\e[33m"
-#define GREEN_FG "\e[32m"
-#define RESET_COLOR "\e[0m"
+#define YELLOW_FG "\x1b[33m"
+#define GREEN_FG "\x1b[32m"
+#define RESET_COLOR "\x1b[0m"
 
-__attribute__((destructor))
 void check_leaks() {
 	std::cout << std::endl;
-	system("leaks -q interns");
+	std::system("leaks -q interns");
 }
 
 int main() {
+	std::atexit(&check_leaks);
 	Bureaucrat bureaucrat("Joe", 1);
 	Intern intern;
 

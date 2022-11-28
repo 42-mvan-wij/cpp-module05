@@ -1,17 +1,18 @@
 #include <iostream>
+#include <cstdlib>
 #include "Form.hpp"
 
-#define YELLOW_FG "\e[33m"
-#define GREEN_FG "\e[32m"
-#define RESET_COLOR "\e[0m"
+#define YELLOW_FG "\x1b[33m"
+#define GREEN_FG "\x1b[32m"
+#define RESET_COLOR "\x1b[0m"
 
-__attribute__((destructor))
 void check_leaks() {
 	std::cout << std::endl;
-	system("leaks -q bureaucrat-form");
+	std::system("leaks -q bureaucrat-form");
 }
 
 int main() {
+	std::atexit(&check_leaks);
 	Bureaucrat harry("Harry", 6);
 	Form form("Test form", 5, 10);
 

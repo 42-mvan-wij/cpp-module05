@@ -1,13 +1,14 @@
 #include <iostream>
+#include <cstdlib>
 #include "Bureaucrat.hpp"
 
-__attribute__((destructor))
 void check_leaks() {
 	std::cout << std::endl;
-	system("leaks -q bureaucrat");
+	std::system("leaks -q bureaucrat");
 }
 
 int main() {
+	std::atexit(&check_leaks);
 	Bureaucrat harry("Harry", 2);
 
 	assert(harry.getName() == "Harry");
