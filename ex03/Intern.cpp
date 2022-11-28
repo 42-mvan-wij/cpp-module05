@@ -6,11 +6,11 @@
 #include "PresidentialPardonForm.hpp"
 
 Intern::Intern() {
-	std::cout << "Intern::Intern() called" << std::endl;
+	std::cout << "Default Intern constructor called" << std::endl;
 }
 
 Intern::Intern(const Intern &src) {
-	std::cout << "Intern::Intern(const Intern &) called" << std::endl;
+	std::cout << "Intern copy constructor called" << std::endl;
 	*this = src;
 }
 
@@ -19,26 +19,34 @@ Intern::~Intern() {
 }
 
 Intern &Intern::operator=(Intern const &rhs) {
-	(void)rhs;
+	if (this == &rhs)
+		return *this;
 	return *this;
 }
 
 template<typename T>
-AForm *createFormInstance(std::string const target) {
+AForm *createForm(std::string const target) {
 	return new T(target);
 }
 
-#define N_FORMS 3
-
 AForm *Intern::makeForm(std::string const form_name, std::string const target) {
-	std::string arr[N_FORMS] = { "ShrubberyCreationForm", "RobotomyRequestForm", "PresidentialPardonForm" };
-	AForm* (*arr2[N_FORMS])(std::string const) = { createFormInstance<ShrubberyCreationForm>, createFormInstance<RobotomyRequestForm>, createFormInstance<PresidentialPardonForm> };
-	for (int i = 0; i < N_FORMS; i++) {
-		if (arr[i] == form_name) {
+	std::string form_names[] = {
+		"ShrubberyCreationForm",
+		"RobotomyRequestForm",
+		"PresidentialPardonForm"
+	};
+	AForm *(*form_creator[])(std::string const) = {
+		createForm<ShrubberyCreationForm>,
+		createForm<RobotomyRequestForm>,
+		createForm<PresidentialPardonForm>
+	};
+
+	for (unsigned int i = 0; i < (sizeof(form_names) / sizeof(*form_names)); i++) {
+		if (form_names[i] == form_name) {
 			std::cout << "Intern creates form \"" << form_name << "\"" << std::endl;
-			return arr2[i](target);
+			return form_creator[i](target);
 		}
 	}
 	std::cout << "Intern could not create form \"" << form_name << "\"" << std::endl;
-	return nullptr;
+	return NULL;
 }
