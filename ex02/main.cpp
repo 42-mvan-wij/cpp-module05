@@ -5,6 +5,7 @@
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
 
+#define RED_FG "\x1b[31m"
 #define YELLOW_FG "\x1b[33m"
 #define GREEN_FG "\x1b[32m"
 #define RESET_COLOR "\x1b[0m"
@@ -16,6 +17,9 @@ void check_leaks() {
 
 int main() {
 	std::atexit(&check_leaks);
+
+	std::srand(std::time(NULL));
+
 	Bureaucrat intern("Intern", 150);
 	Bureaucrat shrub_signer("Shrub signer", 140);
 	Bureaucrat shrub_exec("Shrub executor", 100);
@@ -35,15 +39,23 @@ int main() {
 
 		try {
 			form.beSigned(intern);
+			std::cerr << RED_FG << "Expected some error" << RESET_COLOR << std::endl;
 		} catch (AForm::GradeTooLowException &e) {
 			std::cerr << "1. " << GREEN_FG << "Expected error: " << RESET_COLOR << e.what() << std::endl << "   ";
+		} catch (std::exception &e) {
+			std::cerr << RED_FG << "Unexpected error: " << RESET_COLOR << e.what() << std::endl;
+			throw e;
 		}
 		intern.signForm(form);
 
 		try {
 			form.execute(shrub_exec);
+			std::cerr << RED_FG << "Expected some error" << RESET_COLOR << std::endl;
 		} catch (AForm::NotSignedException &e) {
 			std::cerr << "2. " << GREEN_FG << "Expected error: " << RESET_COLOR << e.what() << std::endl << "   ";
+		} catch (std::exception &e) {
+			std::cerr << RED_FG << "Unexpected error: " << RESET_COLOR << e.what() << std::endl;
+			throw e;
 		}
 		shrub_exec.executeForm(form);
 
@@ -51,8 +63,12 @@ int main() {
 
 		try {
 			form.execute(shrub_signer);
+			std::cerr << RED_FG << "Expected some error" << RESET_COLOR << std::endl;
 		} catch (AForm::GradeTooLowException &e) {
 			std::cerr << "4. " << GREEN_FG << "Expected error: " << RESET_COLOR << e.what() << std::endl << "   ";
+		} catch (std::exception &e) {
+			std::cerr << RED_FG << "Unexpected error: " << RESET_COLOR << e.what() << std::endl;
+			throw e;
 		}
 		shrub_signer.executeForm(form);
 

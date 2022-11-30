@@ -17,6 +17,9 @@ void check_leaks() {
 
 int main() {
 	std::atexit(&check_leaks);
+
+	std::srand(std::time(NULL));
+
 	Bureaucrat bureaucrat("Joe", 1);
 	Intern intern;
 

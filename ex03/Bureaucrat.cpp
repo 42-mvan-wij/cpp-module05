@@ -1,7 +1,7 @@
 #include <iostream>
 #include "Bureaucrat.hpp"
 
-Bureaucrat::Bureaucrat() {
+Bureaucrat::Bureaucrat() : grade(WORST_GRADE) {
 	std::cout << "Default Bureaucrat constructor called" << std::endl;
 }
 
@@ -82,6 +82,6 @@ void Bureaucrat::executeForm(AForm const &form) const {
 }
 
 std::ostream &operator<<(std::ostream &ostream, Bureaucrat &bureaucrat) {
-	ostream << bureaucrat.getName() << ", bureaucrat grade " << bureaucrat.getGrade() << ".";
+	ostream << "Bureaucrat name: " << bureaucrat.getName() << ", grade: " << bureaucrat.getGrade() << ".";
 	return ostream;
 }

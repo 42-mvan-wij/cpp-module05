@@ -3,6 +3,7 @@
 #include <cassert>
 #include "Form.hpp"
 
+#define RED_FG "\x1b[31m"
 #define YELLOW_FG "\x1b[33m"
 #define GREEN_FG "\x1b[32m"
 #define RESET_COLOR "\x1b[0m"
@@ -26,10 +27,12 @@ int main() {
 
 	try {
 		form.beSigned(harry);
-	} catch (Form::GradeTooHighException &e) {
-		throw e;
+		std::cerr << RED_FG << "Expected some error" << RESET_COLOR << std::endl;
 	} catch (Form::GradeTooLowException &e) {
 		std::cerr << "2. " << GREEN_FG << "Expected error: " << RESET_COLOR << e.what() << std::endl;
+	} catch (std::exception &e) {
+		std::cerr << RED_FG << "Unexpected error: " << RESET_COLOR << e.what() << std::endl;
+		throw e;
 	}
 
 	harry.incrementGrade();
@@ -51,34 +54,42 @@ int main() {
 
 	try {
 		Form form3("Test form 3", 151, 70);
-	} catch (Form::GradeTooHighException &e) {
-		throw e;
+		std::cerr << RED_FG << "Expected some error" << RESET_COLOR << std::endl;
 	} catch (Form::GradeTooLowException &e) {
 		std::cerr << "6. " << GREEN_FG << "Expected error: " << RESET_COLOR << e.what() << std::endl;
+	} catch (std::exception &e) {
+		std::cerr << RED_FG << "Unexpected error: " << RESET_COLOR << e.what() << std::endl;
+		throw e;
 	}
 
 	try {
 		Form form4("Test form 4", 0, 70);
-	} catch (Form::GradeTooLowException &e) {
-		throw e;
+		std::cerr << RED_FG << "Expected some error" << RESET_COLOR << std::endl;
 	} catch (Form::GradeTooHighException &e) {
 		std::cerr << "7. " << GREEN_FG << "Expected error: " << RESET_COLOR << e.what() << std::endl;
+	} catch (std::exception &e) {
+		std::cerr << RED_FG << "Unexpected error: " << RESET_COLOR << e.what() << std::endl;
+		throw e;
 	}
 
 	try {
 		Form form5("Test form 5", 70, 151);
-	} catch (Form::GradeTooHighException &e) {
-		throw e;
+		std::cerr << RED_FG << "Expected some error" << RESET_COLOR << std::endl;
 	} catch (Form::GradeTooLowException &e) {
 		std::cerr << "8. " << GREEN_FG << "Expected error: " << RESET_COLOR << e.what() << std::endl;
+	} catch (std::exception &e) {
+		std::cerr << RED_FG << "Unexpected error: " << RESET_COLOR << e.what() << std::endl;
+		throw e;
 	}
 
 	try {
 		Form form6("Test form 6", 70, 0);
-	} catch (Form::GradeTooLowException &e) {
-		throw e;
+		std::cerr << RED_FG << "Expected some error" << RESET_COLOR << std::endl;
 	} catch (Form::GradeTooHighException &e) {
 		std::cerr << "9. " << GREEN_FG << "Expected error: " << RESET_COLOR << e.what() << std::endl;
+	} catch (std::exception &e) {
+		std::cerr << RED_FG << "Unexpected error: " << RESET_COLOR << e.what() << std::endl;
+		throw e;
 	}
 
 	std::cout << std::endl;

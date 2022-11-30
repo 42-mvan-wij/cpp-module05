@@ -31,7 +31,7 @@ class Form {
 		int getSignGrade() const;
 		int getExecGrade() const;
 
-		void beSigned(Bureaucrat &bureaucrat);
+		void beSigned(Bureaucrat const &bureaucrat);
 
 	private:
 		std::string const name;

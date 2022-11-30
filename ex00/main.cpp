@@ -24,10 +24,12 @@ int main() {
 
 	try {
 		harry.incrementGrade();
-	} catch (Bureaucrat::GradeTooLowException &e) {
-		std::cerr << "Unreachable" << std::endl;
+		std::cerr << "Expected some error" << std::endl;
 	} catch (Bureaucrat::GradeTooHighException &e) {
 		std::cerr << "Expected error: " << e.what() << std::endl;
+	} catch (std::exception &e) {
+		std::cerr << "Unexpected error: " << e.what() << std::endl;
+		throw e;
 	}
 
 	Bureaucrat bob("Bob", 149);
@@ -44,10 +46,12 @@ int main() {
 
 	try {
 		bob.decrementGrade();
-	} catch (Bureaucrat::GradeTooHighException &e) {
-		std::cerr << "Unreachable" << std::endl;
+		std::cerr << "Expected some error" << std::endl;
 	} catch (Bureaucrat::GradeTooLowException &e) {
 		std::cerr << "Expected error: " << e.what() << std::endl;
+	} catch (std::exception &e) {
+		std::cerr << "Unexpected error: " << e.what() << std::endl;
+		throw e;
 	}
 
 	std::cout << std::endl;

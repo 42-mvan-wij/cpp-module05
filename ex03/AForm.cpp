@@ -81,7 +81,7 @@ void AForm::beSigned(Bureaucrat const &bureaucrat) {
 	has_been_signed = true;
 }
 
-void AForm::execute(Bureaucrat const & executor) const {
+void AForm::execute(Bureaucrat const &executor) const {
 	if (has_been_signed == false) {
 		throw AForm::NotSignedException();
 	}

@@ -57,14 +57,14 @@ void Bureaucrat::decrementGrade() {
 	++grade;
 }
 
-void Bureaucrat::signForm(Form &form) {
+void Bureaucrat::signForm(Form &form) const {
 	if (form.isSigned()) {
 		std::cout << getName() << " couldn't sign " << form.getName() << " because: " << "Form is already signed" << std::endl;
 		return ;
 	}
 	try {
 		form.beSigned(*this);
-	} catch (Form::GradeTooLowException &e) {
+	} catch (std::exception &e) {
 		std::cout << getName() << " couldn't sign " << form.getName() << " because: " << e.what() << std::endl;
 		return ;
 	}
@@ -72,6 +72,6 @@ void Bureaucrat::signForm(Form &form) {
 }
 
 std::ostream &operator<<(std::ostream &ostream, Bureaucrat &bureaucrat) {
-	ostream << bureaucrat.getName() << ", bureaucrat grade " << bureaucrat.getGrade() << ".";
+	ostream << "Bureaucrat name: " << bureaucrat.getName() << ", grade: " << bureaucrat.getGrade() << ".";
 	return ostream;
 }
